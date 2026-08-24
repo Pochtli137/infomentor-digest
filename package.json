@@ -1,0 +1,14 @@
+{
+  "name": "infomentor-digest",
+  "version": "1.0.0",
+  "description": "Veckobrev ur InfoMentor till din mejl. Allt körs på din egen dator.",
+  "type": "module",
+  "scripts": {
+    "logga-in": "node src/login.mjs",
+    "test": "node src/index.mjs --test",
+    "start": "node src/index.mjs"
+  },
+  "license": "MIT",
+  "dependencies": { "dotenv": "^17.0.0", "nodemailer": "^6.9.0" },
+  "devDependencies": { "puppeteer": "^24.0.0" }
+}
