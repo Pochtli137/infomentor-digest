@@ -37,6 +37,16 @@
   summary::after{content:"+";float:right;color:var(--ink2);font-weight:400}
   details[open] summary::after{content:"−"}
   details .in{padding:0 17px 16px;color:var(--ink2);font-size:15.5px}
+  .flikar{display:flex;gap:6px;margin-top:34px;background:var(--yta);border:1px solid var(--linje);
+    border-radius:13px;padding:5px}
+  .flikar button{flex:1;border:0;background:none;font:inherit;font-size:15.5px;font-weight:700;
+    color:var(--ink2);padding:12px 10px;border-radius:9px;cursor:pointer;line-height:1.25}
+  .flikar button small{display:block;font-weight:400;font-size:12.5px;color:var(--ink2);opacity:.8;margin-top:2px}
+  .flikar button[aria-selected="true"]{background:var(--ink);color:#F6F3EE}
+  .flikar button[aria-selected="true"] small{color:#BDB8AE}
+  .panel[hidden]{display:none}
+  .hamta{display:inline-block;background:var(--ora);color:#fff;text-decoration:none;font-weight:700;
+    font-size:16.5px;padding:14px 22px;border-radius:12px;margin-top:16px}
   .avd{margin-top:52px}
   footer{border-top:1px solid var(--linje);margin-top:56px;padding:26px 0 40px;color:#8A9099;font-size:14px}
   a{color:var(--ora)}
@@ -64,10 +74,65 @@
 
   <div class="avd">
     <h2>Så gör du</h2>
-    <p>Du kommer att skriva några rader i ett program som heter Terminal. Det ser ovant ut men du
-      klistrar bara in text och trycker retur. Du kan inte förstöra något.</p>
+    <p>Två vägar till samma sak. Den första kräver ingenting mer än ett par klick.
+      Den andra ger dig full kontroll men förutsätter att du vågar klistra in text i ett terminalfönster.</p>
 
-    <div class="steg">
+    <div class="flikar" role="tablist">
+      <button role="tab" id="f-klient" aria-controls="p-klient" aria-selected="true">
+        Med Claude<small>Ett par klick, ingen terminal</small></button>
+      <button role="tab" id="f-terminal" aria-controls="p-terminal" aria-selected="false">
+        Med terminalen<small>Full kontroll, kräver lite vana</small></button>
+    </div>
+
+    <div class="panel" id="p-klient" role="tabpanel" aria-labelledby="f-klient">
+      <div class="steg">
+        <div class="nr">1</div>
+        <h3>Ladda ner tillägget</h3>
+        <p>En fil som heter <em>infomentor.mcpb</em>. Den innehåller allt som behövs.</p>
+        <a class="hamta" href="https://github.com/Pochtli137/infomentor-digest/releases/latest/download/infomentor.mcpb">Ladda ner tillägget</a>
+      </div>
+
+      <div class="steg">
+        <div class="nr">2</div>
+        <h3>Installera det i Claude</h3>
+        <p>Öppna Claude Desktop, gå till Inställningar och sedan Extensions, och välj
+          <b>Install Extension</b>. Peka ut filen du just laddade ner. Klart.</p>
+        <div class="tips">Har du inte Claude Desktop? Hämta den på
+          <a href="https://claude.ai/download">claude.ai/download</a>. Schemaläggningen i steg 4
+          kräver ett betalt konto.</div>
+      </div>
+
+      <div class="steg">
+        <div class="nr">3</div>
+        <h3>Logga in en gång</h3>
+        <p>Skriv till Claude:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Logga in på InfoMentor</code></pre>
+        <p>Ett webbläsarfönster öppnas. Välj din kommun och logga in som vanligt med BankID.
+          När du ser InfoMentors startsida stänger det sig självt.
+          <strong>Det här gör du bara en gång.</strong></p>
+        <div class="tips">Inget lösenord sparas. Det som sparas ligger på din dator och är samma
+          sorts nyckel som InfoMentors egen app använder.</div>
+      </div>
+
+      <div class="steg">
+        <div class="nr">4</div>
+        <h3>Be om brevet varje måndag</h3>
+        <p>Klicka <b>Schedule</b> i sidopanelen, välj varje vecka och måndag morgon, och skriv:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Hämta veckan ur InfoMentor och mejla mig en sammanfattning.
+Börja med sådant jag måste svara på, som samtycken och anmälningar.
+Ta sedan vad som hänt och vad som kommer, med datum.
+Hoppa över rubriker där det inte finns något att säga.</code></pre>
+        <p>Vill du bara fråga när det passar skriver du i stället <em>vad har hänt i skolan den här veckan?</em>
+          i ett vanligt samtal.</p>
+        <div class="tips">Mejlet skickas via din egen Gmail-koppling i Claude. Har du inte kopplat
+          den får du sammanfattningen i chatten i stället.</div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-terminal" role="tabpanel" aria-labelledby="f-terminal" hidden>
+      <p>Du kommer att skriva några rader i ett program som heter Terminal. Det ser ovant ut men du
+        klistrar bara in text och trycker retur. Du kan inte förstöra något.</p>
+<div class="steg">
       <div class="nr">1</div>
       <h3>Installera Node</h3>
       <p>Node är motorn som kör programmet. Ladda ner den från
@@ -132,10 +197,14 @@ open .env</code></pre>
       <pre><button class="kopiera">Kopiera</button><code>(crontab -l 2>/dev/null; echo "0 9 * * 1 cd $(pwd) && $(which npm) start >> skolveckan.log 2>&1") | crontab -</code></pre>
       <p>På Windows använder du Task Scheduler och pekar den på <em>npm start</em> i mappen.</p>
     </div>
+    </div>
   </div>
 
   <div class="avd">
     <h2>Om något krånglar</h2>
+    <details><summary>Jag hittar inte Extensions i Claude</summary>
+      <div class="in">Du behöver Claude Desktop, inte webbversionen. Hämta den på
+        <a href="https://claude.ai/download">claude.ai/download</a> och leta under Inställningar.</div></details>
     <details><summary>"command not found: git" eller "npm"</summary>
       <div class="in">Node är inte installerat, eller så behöver du stänga och öppna Terminal igen
         efter installationen. Prova det först.</div></details>
@@ -171,6 +240,17 @@ open .env</code></pre>
 </footer>
 
 <script>
+  var flikar = document.querySelectorAll('.flikar button');
+  flikar.forEach(function (f) {
+    f.addEventListener('click', function () {
+      flikar.forEach(function (a) {
+        var vald = a === f;
+        a.setAttribute('aria-selected', vald);
+        document.getElementById(a.getAttribute('aria-controls')).hidden = !vald;
+      });
+    });
+  });
+
   document.querySelectorAll('.kopiera').forEach(function (k) {
     k.addEventListener('click', function () {
       var kod = k.parentElement.querySelector('code').innerText;

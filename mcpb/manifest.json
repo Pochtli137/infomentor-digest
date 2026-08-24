@@ -1,0 +1,57 @@
+{
+  "manifest_version": "0.2",
+  "name": "infomentor",
+  "display_name": "InfoMentor — skolveckan",
+  "version": "1.0.0",
+  "description": "Hämtar veckans nyheter, kalender, samtycken och dokument ur InfoMentor så att Claude kan skriva ett veckobrev till dig.",
+  "long_description": "Ger Claude läsåtkomst till ditt eget barns InfoMentor. Du loggar in en gång med BankID, sedan kan du fråga vad som hänt i skolan, eller schemalägga ett veckobrev till din mejl.\n\nAllt körs på din dator. Din inloggning skickas aldrig någon annanstans.\n\nInfoMentor lämnar bara ut det barn som är aktivt i portalen. Har du flera barn byter du där.",
+  "author": {
+    "name": "Kim Dahlroth",
+    "url": "https://github.com/Pochtli137/infomentor-digest"
+  },
+  "homepage": "https://skolveckan.vercel.app",
+  "documentation": "https://github.com/Pochtli137/infomentor-digest#readme",
+  "support": "https://github.com/Pochtli137/infomentor-digest/issues",
+  "license": "MIT",
+  "keywords": [
+    "skola",
+    "infomentor",
+    "sverige",
+    "familj"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.mjs"
+      ],
+      "env": {}
+    }
+  },
+  "tools": [
+    {
+      "name": "infomentor_logga_in",
+      "description": "Loggar in mot InfoMentor med BankID. Görs en gång."
+    },
+    {
+      "name": "infomentor_veckan",
+      "description": "Hämtar veckans nyheter, kalender, samtycken, dokument och planeringar."
+    },
+    {
+      "name": "infomentor_status",
+      "description": "Visar om inloggningen finns och vilka barn kontot ser."
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

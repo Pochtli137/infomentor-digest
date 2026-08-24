@@ -2,3 +2,6 @@
 node_modules/
 forhandsvisning.html
 *.log
+.vercel
+mcpb/node_modules/
+webb/*.png

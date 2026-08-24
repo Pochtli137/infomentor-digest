@@ -1,0 +1,6 @@
+{
+  "name": "infomentor-mcpb",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.12.1" }
+}
