@@ -4,7 +4,8 @@
 
 **Gjort:** `webb/index.html` omgjord på grenen `plattform-och-ai`: först InfoMentor eller Schoolity,
 sedan Claude eller ChatGPT, fyra vägar, valet speglas i URL:en (`#schoolity-chatgpt`).
-Terminalvägen flyttad till en rad längst ner. Inte deployad, live-sidan är oförändrad.
+Terminalvägen flyttad till en rad längst ner. **Deployad till skolveckan.vercel.app 2026-10-22 på
+Kims order, före testerna.** Tre av fyra vägar ligger alltså live otestade.
 `.env.exempel` omdöpt till `.env.example` (env-spärren släpper bara igenom det namnet).
 
 **Varför vägarna ser ut som de gör** (Anthropics och OpenAIs hjälpsidor, lästa 2026-10-22):
@@ -19,8 +20,7 @@ Terminalvägen flyttad till en rad längst ner. Inte deployad, live-sidan är of
 **Nästa:**
 1. Kim testar de tre otestade vägarna, två körningar med en vecka emellan (håller inloggningen?):
    Schoolity + Claude i Chrome, InfoMentor + ChatGPT Work, Schoolity + ChatGPT Work.
-2. Vägar som inte klarar testet tas bort från sidan innan deploy.
-3. Deploy först efter Kims ja.
+2. Vägar som inte klarar testet tas bort från sidan direkt.
 
 **Overifierat:**
 - Att ChatGPT Work och dess molnwebbläsare finns i Sverige (EES).
