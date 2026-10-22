@@ -34,7 +34,15 @@ Kims order, före testerna.** Tre av fyra vägar ligger alltså live otestade.
    Schoolity + Claude i Chrome, InfoMentor + ChatGPT Work, Schoolity + ChatGPT Work.
 2. Vägar som inte klarar testet tas bort från sidan direkt.
 
+**Mailet (2026-10-22, Kims beslut):** alla fyra vägarna mailar automatiskt via Gmail-kopplingen,
+föräldern väljer "alltid tillåta" första gången. Anthropic: godkännande per mejl är standard, Team-
+och Enterprise-ägare styr om medlemmar får slå av det (support 10166901, läst 22/10).
+
 **Overifierat:**
+- Att ett eget Claude Pro-konto kan välja "alltid tillåta" för Gmail-utskick (Kim säger ja, sidan
+  säger det inte uttryckligen), och att det gäller även schemalagda uppgifter och Claude i Chrome.
+- Att ChatGPT:s Gmail-app kan skicka utan klick. OpenAIs release notes 2026-06-08 sa utkast som
+  användaren skickar, och Gmail-appen kan vara spärrad för Plus/Pro i EES.
 - Att ChatGPT Work och dess molnwebbläsare finns i Sverige (EES).
 - Att BankID (QR) och Google-inloggning går igenom ChatGPT:s molnwebbläsare.
 - Hur länge InfoMentor och Schoolity behåller en webbsession.

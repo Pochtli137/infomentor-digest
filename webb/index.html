@@ -15,7 +15,7 @@
   .visa{display:inline-block;margin-top:24px;background:#F6F3EE;color:#1C1F24;text-decoration:none;
     font-weight:700;font-size:16.5px;padding:14px 22px;border-radius:12px}
   .visa:hover{background:#fff}
-  main{padding:52px 0 80px}
+  main.w{padding-top:56px}
   h2{font-size:26px;font-weight:800;letter-spacing:-.03em;margin:0 0 8px}
   p{color:var(--ink2);margin-top:12px}
   p strong{color:var(--ink)}
@@ -99,8 +99,8 @@
 
     <!-- InfoMentor + Claude -->
     <div class="panel" id="infomentor-claude">
-      <p>Ett tillägg till Claude Desktop hämtar veckan direkt ur InfoMentor. Du loggar in en gång,
-        sedan förnyar inloggningen sig själv.</p>
+      <p>Ett tillägg till Claude Desktop hämtar veckan direkt ur InfoMentor, och Claude mailar
+        sammanfattningen från din Gmail. Du ställer in det en gång.</p>
       <div class="steg">
         <div class="nr">1</div>
         <h3>Ladda ner tillägget</h3>
@@ -126,18 +126,29 @@
       </div>
       <div class="steg">
         <div class="nr">4</div>
-        <h3>Schemalägg måndag morgon</h3>
-        <p>Välj <b>Scheduled</b> i sidopanelen och skapa en ny uppgift som körs varje vecka på måndag morgon.
-          Klistra in:</p>
+        <h3>Koppla Gmail</h3>
+        <p>Gå till Inställningar och Connectors i Claude och koppla Gmail. Brevet skickas från din egen adress.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">5</div>
+        <h3>Prova en gång</h3>
+        <p>Klistra in i en vanlig chatt:</p>
         <pre><button class="kopiera">Kopiera</button><code>Hämta veckan ur InfoMentor och sammanfatta den för mig.
 Börja med sådant jag måste göra något åt, som samtycken, anmälningar och saker som ska med till skolan.
 Ta sedan meddelanden från skolan, läxor och prov, och kalendern för de kommande två veckorna, med datum.
 Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
-Ta bara med sådant som står i InfoMentor.</code></pre>
+Ta bara med sådant som står i InfoMentor.
+Mejla sammanfattningen till mig med ämnet Skolveckan och veckans nummer.</code></pre>
+        <p>Första gången Claude ska skicka frågar den om lov. <strong>Välj att alltid tillåta</strong>,
+          så går mailet iväg av sig självt varje måndag. Ska fler ha brevet, lägg till deras adresser i sista raden.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">6</div>
+        <h3>Schemalägg måndag morgon</h3>
+        <p>Välj <b>Scheduled</b> i sidopanelen och skapa en ny uppgift som körs varje vecka på måndag morgon,
+          med samma text som i steg 5.</p>
         <div class="tips"><b>Claude Desktop måste vara öppen och datorn vaken när uppgiften körs.</b>
           Tillägget finns på din dator, så Claude når det bara då. Välj en tid när datorn brukar vara igång.</div>
-        <p>Sammanfattningen hamnar under Scheduled i Claude. Vill du ha den som mejl lägger du till
-          <em>och mejla den till mig</em> och kopplar Gmail i Claude. Claude ber dig godkänna varje mejl innan det skickas.</p>
       </div>
       <p class="bor"><b>Var inloggningen sparas:</b> på din dator. Det Claude läser ur InfoMentor skickas till
         Anthropic för att sammanfattas, som allt annat du ber Claude om.</p>
@@ -145,8 +156,8 @@ Ta bara med sådant som står i InfoMentor.</code></pre>
 
     <!-- Schoolity + Claude -->
     <div class="panel" id="schoolity-claude" hidden>
-      <p>Claude i Chrome läser Schoolity i din vanliga webbläsare, där du redan är inloggad med Google.
-        Det enda du installerar är tillägget.</p>
+      <p>Claude i Chrome läser Schoolity i din vanliga webbläsare, där du redan är inloggad med Google,
+        och mailar sammanfattningen från din Gmail. Du ställer in det en gång.</p>
       <div class="steg">
         <div class="nr">1</div>
         <h3>Installera Claude i Chrome</h3>
@@ -162,6 +173,12 @@ Ta bara med sådant som står i InfoMentor.</code></pre>
       </div>
       <div class="steg">
         <div class="nr">3</div>
+        <h3>Koppla Gmail</h3>
+        <p>Gå till Inställningar och Connectors på <a href="https://claude.ai">claude.ai</a> och koppla Gmail.
+          Brevet skickas från din egen adress.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">4</div>
         <h3>Prova en gång</h3>
         <p>Öppna Claude i sidopanelen och klistra in:</p>
         <pre><button class="kopiera">Kopiera</button><code>Öppna schoolity.com/login/?autoinlog=true och sammanfatta vad som hänt i skolan den senaste veckan.
@@ -169,11 +186,13 @@ Gå igenom startsidan, notiserna och varje del i menyn, som schema, info, frånv
 Börja med sådant jag måste göra något åt, som svar, anmälningar och saker som ska med till skolan.
 Ta sedan meddelanden från skolan, läxor och prov, inställda lektioner och frånvaro, med datum.
 Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
-Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.</code></pre>
-        <p>Läs igenom svaret. Saknas något du vet finns där, lägg till var Claude ska titta innan du går vidare.</p>
+Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.
+Mejla sammanfattningen till mig med ämnet Skolveckan och veckans nummer.</code></pre>
+        <p>Första gången Claude ska skicka frågar den om lov. <strong>Välj att alltid tillåta</strong>,
+          så går mailet iväg av sig självt varje måndag. Ska fler ha brevet, lägg till deras adresser i sista raden.</p>
       </div>
       <div class="steg">
-        <div class="nr">4</div>
+        <div class="nr">5</div>
         <h3>Schemalägg måndag morgon</h3>
         <p>Spara instruktionen som en genväg i Claude i Chrome och schemalägg den med klockikonen:
           varje vecka, måndag morgon.</p>
@@ -186,10 +205,15 @@ Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på n
 
     <!-- InfoMentor + ChatGPT -->
     <div class="panel" id="infomentor-chatgpt" hidden>
-      <p>ChatGPT läser InfoMentor i en egen webbläsare i molnet. Du loggar in där en gång med BankID,
-        och datorn behöver inte vara igång när veckan sammanfattas.</p>
+      <p>ChatGPT läser InfoMentor i en egen webbläsare i molnet och mailar sammanfattningen från din Gmail.
+        Du loggar in där en gång med BankID, och datorn behöver inte vara igång när veckan sammanfattas.</p>
       <div class="steg">
         <div class="nr">1</div>
+        <h3>Koppla Gmail</h3>
+        <p>Gå till Inställningar och Appar i ChatGPT och koppla Gmail. Brevet skickas från din egen adress.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">2</div>
         <h3>Starta en uppgift i Work</h3>
         <p>Öppna <a href="https://chatgpt.com">chatgpt.com</a>, välj <b>Work</b> och klistra in:</p>
         <pre><button class="kopiera">Kopiera</button><code>Öppna hub.infomentor.se och sammanfatta vad som hänt i skolan den senaste veckan.
@@ -197,26 +221,23 @@ Gå igenom startsidan, notiserna och varje del i menyn, som nyheter, kalender, s
 Börja med sådant jag måste göra något åt, som samtycken, anmälningar och saker som ska med till skolan.
 Ta sedan meddelanden från skolan, läxor och prov, och kalendern för de kommande två veckorna, med datum.
 Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
-Ta bara med sådant som står i InfoMentor. Ändra ingenting och svara inte på något där.</code></pre>
-      </div>
-      <div class="steg">
-        <div class="nr">2</div>
-        <h3>Logga in när ChatGPT ber om det</h3>
-        <p>ChatGPT stannar vid InfoMentors inloggning. Ta över webbläsaren, välj din kommun och logga in
-          med BankID genom att skanna QR-koden med telefonen. Sedan fortsätter ChatGPT själv.</p>
+Ta bara med sådant som står i InfoMentor. Ändra ingenting och svara inte på något där.
+Mejla sammanfattningen till mig med ämnet Skolveckan och veckans nummer.</code></pre>
       </div>
       <div class="steg">
         <div class="nr">3</div>
-        <h3>Gör det till en vana</h3>
-        <p>När sammanfattningen ser bra ut skriver du:</p>
-        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
-        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
+        <h3>Logga in när ChatGPT ber om det</h3>
+        <p>ChatGPT stannar vid InfoMentors inloggning. Ta över webbläsaren, välj din kommun och logga in
+          med BankID genom att skanna QR-koden med telefonen. Sedan fortsätter ChatGPT själv.</p>
+        <p>Första gången ChatGPT ska skicka frågar den om lov. <strong>Välj att alltid tillåta</strong>,
+          så går mailet iväg av sig självt varje måndag. Ska fler ha brevet, lägg till deras adresser i sista raden.</p>
       </div>
       <div class="steg">
         <div class="nr">4</div>
-        <h3>Få besked via mejl</h3>
-        <p>Gå till Inställningar och Notiser och slå på e-post för schemalagda uppgifter.
-          Då mejlar ChatGPT dig när veckans sammanfattning är klar.</p>
+        <h3>Gör det till en vana</h3>
+        <p>När mailet kommit fram skriver du:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
+        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
       </div>
       <p class="bor"><b>Var inloggningen sparas:</b> i ChatGPT:s webbläsare hos OpenAI, inte på din dator.
         Den gäller tills InfoMentor släpper den, och då loggar du in igen på samma sätt.</p>
@@ -224,10 +245,15 @@ Ta bara med sådant som står i InfoMentor. Ändra ingenting och svara inte på 
 
     <!-- Schoolity + ChatGPT -->
     <div class="panel" id="schoolity-chatgpt" hidden>
-      <p>ChatGPT läser Schoolity i en egen webbläsare i molnet. Du loggar in där en gång med Google,
-        och datorn behöver inte vara igång när veckan sammanfattas.</p>
+      <p>ChatGPT läser Schoolity i en egen webbläsare i molnet och mailar sammanfattningen från din Gmail.
+        Du loggar in där en gång med Google, och datorn behöver inte vara igång när veckan sammanfattas.</p>
       <div class="steg">
         <div class="nr">1</div>
+        <h3>Koppla Gmail</h3>
+        <p>Gå till Inställningar och Appar i ChatGPT och koppla Gmail. Brevet skickas från din egen adress.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">2</div>
         <h3>Starta en uppgift i Work</h3>
         <p>Öppna <a href="https://chatgpt.com">chatgpt.com</a>, välj <b>Work</b> och klistra in:</p>
         <pre><button class="kopiera">Kopiera</button><code>Öppna schoolity.com/login/?autoinlog=true och sammanfatta vad som hänt i skolan den senaste veckan.
@@ -235,26 +261,23 @@ Gå igenom startsidan, notiserna och varje del i menyn, som schema, info, frånv
 Börja med sådant jag måste göra något åt, som svar, anmälningar och saker som ska med till skolan.
 Ta sedan meddelanden från skolan, läxor och prov, inställda lektioner och frånvaro, med datum.
 Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
-Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.</code></pre>
-      </div>
-      <div class="steg">
-        <div class="nr">2</div>
-        <h3>Logga in när ChatGPT ber om det</h3>
-        <p>ChatGPT stannar vid Schoolitys inloggning. Ta över webbläsaren och logga in med det
-          Google-konto du använder för Schoolity. Sedan fortsätter ChatGPT själv.</p>
+Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.
+Mejla sammanfattningen till mig med ämnet Skolveckan och veckans nummer.</code></pre>
       </div>
       <div class="steg">
         <div class="nr">3</div>
-        <h3>Gör det till en vana</h3>
-        <p>När sammanfattningen ser bra ut skriver du:</p>
-        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
-        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
+        <h3>Logga in när ChatGPT ber om det</h3>
+        <p>ChatGPT stannar vid Schoolitys inloggning. Ta över webbläsaren och logga in med det
+          Google-konto du använder för Schoolity. Sedan fortsätter ChatGPT själv.</p>
+        <p>Första gången ChatGPT ska skicka frågar den om lov. <strong>Välj att alltid tillåta</strong>,
+          så går mailet iväg av sig självt varje måndag. Ska fler ha brevet, lägg till deras adresser i sista raden.</p>
       </div>
       <div class="steg">
         <div class="nr">4</div>
-        <h3>Få besked via mejl</h3>
-        <p>Gå till Inställningar och Notiser och slå på e-post för schemalagda uppgifter.
-          Då mejlar ChatGPT dig när veckans sammanfattning är klar.</p>
+        <h3>Gör det till en vana</h3>
+        <p>När mailet kommit fram skriver du:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
+        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
       </div>
       <p class="bor"><b>Var inloggningen sparas:</b> i ChatGPT:s webbläsare hos OpenAI, inte på din dator.
         Den gäller tills Schoolity släpper den, och då loggar du in igen på samma sätt.</p>
@@ -263,10 +286,10 @@ Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på n
 
   <div class="avd">
     <h2>Om något krånglar</h2>
-    <details><summary>Sammanfattningen kom inte på måndagen</summary>
-      <div class="in">Med Claude måste datorn vara vaken och Claude Desktop eller Chrome öppen när uppgiften körs.
-        Flytta tiden till när datorn brukar vara igång. Med ChatGPT: kolla under Scheduled om uppgiften
-        stannade vid inloggningen, och logga in igen.</div></details>
+    <details><summary>Mailet kom inte på måndagen</summary>
+      <div class="in">Kolla först under Scheduled om uppgiften väntar på att få skicka. Välj då att alltid tillåta.
+        Med Claude måste dessutom datorn vara vaken och Claude Desktop eller Chrome öppen när uppgiften körs.
+        Med ChatGPT kan uppgiften ha stannat vid inloggningen, och då loggar du in igen.</div></details>
     <details><summary>Jag hittar inte Extensions i Claude</summary>
       <div class="in">Du behöver Claude Desktop, inte webbversionen. Hämta den på
         <a href="https://claude.ai/download">claude.ai/download</a> och leta under Inställningar.</div></details>
