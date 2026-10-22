@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="sv"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skolveckan — få InfoMentor som ett mejl</title>
-<meta name="description" content="Ett mejl i veckan med vad som hänt i ditt barns skola. Körs på din egen dator, gratis.">
+<title>Skolveckan — skolan sammanfattad varje måndag</title>
+<meta name="description" content="Låt Claude eller ChatGPT gå igenom InfoMentor eller Schoolity och sammanfatta skolveckan åt dig. Ingen tjänst, inget konto hos oss.">
 <style>
   :root{--ink:#1C1F24;--ink2:#565D66;--linje:#E4E0D9;--pap:#FCFAF6;--yta:#fff;--ora:#D9620A;--gron:#1B7A4C}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -10,7 +10,7 @@
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:17px}
   .w{max-width:720px;margin:0 auto;padding:0 22px}
   header{background:var(--ink);color:#F6F3EE;padding:60px 0 52px}
-  header h1{font-size:clamp(30px,5.4vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.08;max-width:16ch}
+  header h1{font-size:clamp(30px,5.4vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.08;max-width:17ch}
   header p{margin-top:18px;color:#BDB8AE;font-size:19px;max-width:52ch}
   .visa{display:inline-block;margin-top:24px;background:#F6F3EE;color:#1C1F24;text-decoration:none;
     font-weight:700;font-size:16.5px;padding:14px 22px;border-radius:12px}
@@ -24,28 +24,35 @@
     border-radius:50%;background:var(--ora);color:#fff;font-weight:800;font-size:15px;margin-bottom:12px}
   .steg h3{font-size:20px;font-weight:800;letter-spacing:-.02em}
   pre{background:#1C1F24;color:#F2EEE7;padding:15px 17px;border-radius:11px;margin-top:14px;
-    overflow-x:auto;font-size:14.5px;line-height:1.55;position:relative}
+    overflow-x:auto;font-size:14.5px;line-height:1.55;position:relative;white-space:pre-wrap}
   pre code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
   .kopiera{position:absolute;top:9px;right:9px;background:#33383F;color:#D8D3CA;border:0;
     font-size:11.5px;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
   .kopiera:hover{background:#41474F}
+  pre .kopiera + code{display:block;padding-right:64px}
   .tips{background:#FBF3E9;border-left:4px solid var(--ora);padding:14px 17px;border-radius:0 10px 10px 0;margin-top:16px;font-size:15.5px}
   .tips b{color:var(--ink)}
   .obs{background:#FDEDED;border-left:4px solid #B3261E;padding:14px 17px;border-radius:0 10px 10px 0;margin-top:16px;font-size:15.5px}
+  .bor{margin-top:22px;padding-top:16px;border-top:1px solid var(--linje);font-size:15.5px}
+  .bor b{color:var(--ink)}
   details{border:1px solid var(--linje);border-radius:12px;background:var(--yta);margin-top:11px}
   summary{cursor:pointer;padding:14px 17px;font-weight:700;font-size:16px;list-style:none}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";float:right;color:var(--ink2);font-weight:400}
   details[open] summary::after{content:"−"}
   details .in{padding:0 17px 16px;color:var(--ink2);font-size:15.5px}
-  .flikar{display:flex;gap:6px;margin-top:34px;background:var(--yta);border:1px solid var(--linje);
+  .fraga{margin-top:30px;font-weight:800;font-size:17px;color:var(--ink)}
+  .fraga span{color:var(--ora)}
+  .flikar{display:flex;gap:6px;margin-top:10px;background:var(--yta);border:1px solid var(--linje);
     border-radius:13px;padding:5px}
   .flikar button{flex:1;border:0;background:none;font:inherit;font-size:15.5px;font-weight:700;
     color:var(--ink2);padding:12px 10px;border-radius:9px;cursor:pointer;line-height:1.25}
   .flikar button small{display:block;font-weight:400;font-size:12.5px;color:var(--ink2);opacity:.8;margin-top:2px}
-  .flikar button[aria-selected="true"]{background:var(--ink);color:#F6F3EE}
-  .flikar button[aria-selected="true"] small{color:#BDB8AE}
+  .flikar button[aria-pressed="true"]{background:var(--ink);color:#F6F3EE}
+  .flikar button[aria-pressed="true"] small{color:#BDB8AE}
+  .panel{margin-top:14px}
   .panel[hidden]{display:none}
+  .panel > p:first-child{margin-top:26px}
   .hamta{display:inline-block;background:var(--ora);color:#fff;text-decoration:none;font-weight:700;
     font-size:16.5px;padding:14px 22px;border-radius:12px;margin-top:16px}
   .avd{margin-top:52px}
@@ -59,196 +66,264 @@
 </style></head><body>
 
 <header><div class="w">
-  <h1>Få InfoMentor som ett mejl i veckan</h1>
-  <p>Ett brev varje måndag med vad som hänt i skolan och vad som kommer. Överst det som kräver att du gör något.</p>
-  <a class="visa" href="/exempel.html">Så här ser mejlet ut →</a>
+  <h1>Få skolveckan sammanfattad varje måndag</h1>
+  <p>Din AI-assistent går igenom allt skolan publicerat i InfoMentor eller Schoolity och skriver ihop det.
+    Överst det som kräver att du gör något.</p>
+  <a class="visa" href="/exempel.html">Så här kan det se ut →</a>
 </div></header>
 
 <main class="w">
   <h2>Varför</h2>
-  <p>InfoMentor samlar allt men berättar ingenting. Nyheter, kalender, dokument och planeringar
+  <p>Skolplattformarna samlar allt men berättar ingenting. Nyheter, kalender, uppgifter och samtycken
     ligger på olika ställen, och notiserna säger bara att något publicerats, inte vad.
-    Det här hämtar allt en gång i veckan och skickar en sammanfattning till din mejl.</p>
-  <p><strong>Din inloggning lämnar aldrig din dator.</strong> Det finns ingen server, ingen tjänst
-    och inget konto hos någon annan. Du kör programmet själv, det pratar direkt med InfoMentor
-    och skickar mejlet från din egen adress.</p>
+    Här låter du Claude eller ChatGPT läsa allt en gång i veckan och sammanfatta det.</p>
+  <p><strong>Det finns ingen tjänst här.</strong> Ingen sida där du loggar in hos oss och ingen server som
+    ser ditt barns uppgifter. Du kopplar din egen assistent till ditt eget konto. Var inloggningen sparas
+    beror på vilken väg du väljer, och det står vid varje väg.</p>
 
   <div class="avd">
     <h2>Så gör du</h2>
-    <p>Två vägar till samma sak. Den första kräver ingenting mer än ett par klick.
-      Den andra ger dig full kontroll men förutsätter att du vågar klistra in text i ett terminalfönster.</p>
+    <p>Välj två saker, så visas stegen för just dig.</p>
 
-    <div class="flikar" role="tablist">
-      <button role="tab" id="f-klient" aria-controls="p-klient" aria-selected="true">
-        Med Claude<small>Ett par klick, ingen terminal</small></button>
-      <button role="tab" id="f-terminal" aria-controls="p-terminal" aria-selected="false">
-        Med terminalen<small>Full kontroll, kräver lite vana</small></button>
+    <p class="fraga"><span>1.</span> Vilken plattform använder skolan?</p>
+    <div class="flikar" data-grupp="plattform">
+      <button type="button" data-val="infomentor" aria-pressed="true">InfoMentor<small>Loggar in med BankID</small></button>
+      <button type="button" data-val="schoolity" aria-pressed="false">Schoolity<small>Loggar in med Google</small></button>
     </div>
 
-    <div class="panel" id="p-klient" role="tabpanel" aria-labelledby="f-klient">
+    <p class="fraga"><span>2.</span> Vilken AI använder du?</p>
+    <div class="flikar" data-grupp="ai">
+      <button type="button" data-val="claude" aria-pressed="true">Claude<small>Pro eller högre</small></button>
+      <button type="button" data-val="chatgpt" aria-pressed="false">ChatGPT<small>Plus eller högre</small></button>
+    </div>
+
+    <!-- InfoMentor + Claude -->
+    <div class="panel" id="infomentor-claude">
+      <p>Ett tillägg till Claude Desktop hämtar veckan direkt ur InfoMentor. Du loggar in en gång,
+        sedan förnyar inloggningen sig själv.</p>
       <div class="steg">
         <div class="nr">1</div>
         <h3>Ladda ner tillägget</h3>
         <p>En fil som heter <em>infomentor.mcpb</em>. Den innehåller allt som behövs.</p>
         <a class="hamta" href="https://github.com/Pochtli137/infomentor-digest/releases/latest/download/infomentor.mcpb">Ladda ner tillägget</a>
       </div>
-
       <div class="steg">
         <div class="nr">2</div>
-        <h3>Installera det i Claude</h3>
-        <p>Öppna Claude Desktop, gå till Inställningar och sedan Extensions, och välj
-          <b>Install Extension</b>. Peka ut filen du just laddade ner. Klart.</p>
+        <h3>Installera det i Claude Desktop</h3>
+        <p>Öppna Claude Desktop och gå till Inställningar, Extensions och Avancerade inställningar.
+          Välj <b>Install Extension</b> och peka ut filen du just laddade ner.</p>
         <div class="tips">Har du inte Claude Desktop? Hämta den på
-          <a href="https://claude.ai/download">claude.ai/download</a>. Schemaläggningen i steg 4
-          kräver ett betalt konto.</div>
+          <a href="https://claude.ai/download">claude.ai/download</a>. Webbversionen räcker inte, eftersom
+          tillägget körs på din dator.</div>
       </div>
-
       <div class="steg">
         <div class="nr">3</div>
         <h3>Logga in en gång</h3>
         <p>Skriv till Claude:</p>
         <pre><button class="kopiera">Kopiera</button><code>Logga in på InfoMentor</code></pre>
         <p>Ett webbläsarfönster öppnas. Välj din kommun och logga in som vanligt med BankID.
-          När du ser InfoMentors startsida stänger det sig självt.
-          <strong>Det här gör du bara en gång.</strong></p>
-        <div class="tips">Inget lösenord sparas. Det som sparas ligger på din dator och är samma
-          sorts nyckel som InfoMentors egen app använder.</div>
+          När du ser InfoMentors startsida stänger det sig självt. <strong>Det här gör du bara en gång.</strong></p>
       </div>
-
       <div class="steg">
         <div class="nr">4</div>
-        <h3>Be om brevet varje måndag</h3>
-        <p>Klicka <b>Schedule</b> i sidopanelen, välj varje vecka och måndag morgon, och skriv:</p>
-        <pre><button class="kopiera">Kopiera</button><code>Hämta veckan ur InfoMentor och mejla mig en sammanfattning.
-Börja med sådant jag måste svara på, som samtycken och anmälningar.
-Ta sedan vad som hänt och vad som kommer, med datum.
-Hoppa över rubriker där det inte finns något att säga.</code></pre>
-        <p>Vill du bara fråga när det passar skriver du i stället <em>vad har hänt i skolan den här veckan?</em>
-          i ett vanligt samtal.</p>
-        <div class="tips">Mejlet skickas via din egen Gmail-koppling i Claude. Har du inte kopplat
-          den får du sammanfattningen i chatten i stället.</div>
+        <h3>Schemalägg måndag morgon</h3>
+        <p>Välj <b>Scheduled</b> i sidopanelen och skapa en ny uppgift som körs varje vecka på måndag morgon.
+          Klistra in:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Hämta veckan ur InfoMentor och sammanfatta den för mig.
+Börja med sådant jag måste göra något åt, som samtycken, anmälningar och saker som ska med till skolan.
+Ta sedan meddelanden från skolan, läxor och prov, och kalendern för de kommande två veckorna, med datum.
+Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
+Ta bara med sådant som står i InfoMentor.</code></pre>
+        <div class="tips"><b>Claude Desktop måste vara öppen och datorn vaken när uppgiften körs.</b>
+          Tillägget finns på din dator, så Claude når det bara då. Välj en tid när datorn brukar vara igång.</div>
+        <p>Sammanfattningen hamnar under Scheduled i Claude. Vill du ha den som mejl lägger du till
+          <em>och mejla den till mig</em> och kopplar Gmail i Claude. Claude ber dig godkänna varje mejl innan det skickas.</p>
       </div>
+      <p class="bor"><b>Var inloggningen sparas:</b> på din dator. Det Claude läser ur InfoMentor skickas till
+        Anthropic för att sammanfattas, som allt annat du ber Claude om.</p>
     </div>
 
-    <div class="panel" id="p-terminal" role="tabpanel" aria-labelledby="f-terminal" hidden>
-      <p>Du kommer att skriva några rader i ett program som heter Terminal. Det ser ovant ut men du
-        klistrar bara in text och trycker retur. Du kan inte förstöra något.</p>
-<div class="steg">
-      <div class="nr">1</div>
-      <h3>Installera Node</h3>
-      <p>Node är motorn som kör programmet. Ladda ner den från
-        <a href="https://nodejs.org">nodejs.org</a> och välj knappen som slutar på <b>LTS</b>.
-        Öppna filen och klicka igenom installationen.</p>
+    <!-- Schoolity + Claude -->
+    <div class="panel" id="schoolity-claude" hidden>
+      <p>Claude i Chrome läser Schoolity i din vanliga webbläsare, där du redan är inloggad med Google.
+        Det enda du installerar är tillägget.</p>
+      <div class="steg">
+        <div class="nr">1</div>
+        <h3>Installera Claude i Chrome</h3>
+        <p>Lägg till tillägget Claude i Google Chrome, logga in med ditt Claude-konto och fäst det i
+          verktygsfältet. <a href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Anthropics guide</a>
+          visar var du hittar det.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">2</div>
+        <h3>Logga in på Schoolity</h3>
+        <p>Gå till <a href="https://www.schoolity.com">schoolity.com</a> i Chrome och logga in med Google som vanligt.
+          Är du redan inloggad är steget klart.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">3</div>
+        <h3>Prova en gång</h3>
+        <p>Öppna Claude i sidopanelen och klistra in:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Öppna schoolity.com/login/?autoinlog=true och sammanfatta vad som hänt i skolan den senaste veckan.
+Gå igenom Anslagstavlan, notiserna, Uppgifter och Frånvaro.
+Börja med sådant jag måste göra något åt, som svar, anmälningar och saker som ska med till skolan.
+Ta sedan meddelanden från skolan, läxor och prov, inställda lektioner och frånvaro, med datum.
+Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
+Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.</code></pre>
+        <p>Läs igenom svaret. Saknas något du vet finns där, lägg till var Claude ska titta innan du går vidare.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">4</div>
+        <h3>Schemalägg måndag morgon</h3>
+        <p>Spara instruktionen som en genväg i Claude i Chrome och schemalägg den med klockikonen:
+          varje vecka, måndag morgon.</p>
+        <div class="tips"><b>Chrome måste vara öppen och datorn vaken när genvägen körs.</b>
+          Välj en tid när datorn brukar vara igång.</div>
+      </div>
+      <p class="bor"><b>Var inloggningen sparas:</b> i din egen Chrome, som vanligt. Det Claude läser på
+        sidorna skickas till Anthropic för att sammanfattas.</p>
     </div>
 
-    <div class="steg">
-      <div class="nr">2</div>
-      <h3>Öppna Terminal</h3>
-      <p><b>Mac:</b> tryck cmd och mellanslag, skriv <em>terminal</em>, tryck retur.<br>
-         <b>Windows:</b> tryck Windows-tangenten, skriv <em>powershell</em>, tryck retur.</p>
-      <p>Ett fönster med text öppnas. Där klistrar du in raderna nedan, en i taget, och trycker retur efter varje.</p>
+    <!-- InfoMentor + ChatGPT -->
+    <div class="panel" id="infomentor-chatgpt" hidden>
+      <p>ChatGPT läser InfoMentor i en egen webbläsare i molnet. Du loggar in där en gång med BankID,
+        och datorn behöver inte vara igång när veckan sammanfattas.</p>
+      <div class="steg">
+        <div class="nr">1</div>
+        <h3>Starta en uppgift i Work</h3>
+        <p>Öppna <a href="https://chatgpt.com">chatgpt.com</a>, välj <b>Work</b> och klistra in:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Öppna hub.infomentor.se och sammanfatta vad som hänt i skolan den senaste veckan.
+Gå igenom Nyheter, Kalender, Samtycken och Dokument.
+Börja med sådant jag måste göra något åt, som samtycken, anmälningar och saker som ska med till skolan.
+Ta sedan meddelanden från skolan, läxor och prov, och kalendern för de kommande två veckorna, med datum.
+Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
+Ta bara med sådant som står i InfoMentor. Ändra ingenting och svara inte på något där.</code></pre>
+      </div>
+      <div class="steg">
+        <div class="nr">2</div>
+        <h3>Logga in när ChatGPT ber om det</h3>
+        <p>ChatGPT stannar vid InfoMentors inloggning. Ta över webbläsaren, välj din kommun och logga in
+          med BankID genom att skanna QR-koden med telefonen. Sedan fortsätter ChatGPT själv.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">3</div>
+        <h3>Gör det till en vana</h3>
+        <p>När sammanfattningen ser bra ut skriver du:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
+        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">4</div>
+        <h3>Få besked via mejl</h3>
+        <p>Gå till Inställningar och Notiser och slå på e-post för schemalagda uppgifter.
+          Då mejlar ChatGPT dig när veckans sammanfattning är klar.</p>
+      </div>
+      <p class="bor"><b>Var inloggningen sparas:</b> i ChatGPT:s webbläsare hos OpenAI, inte på din dator.
+        Den gäller tills InfoMentor släpper den, och då loggar du in igen på samma sätt.</p>
     </div>
 
-    <div class="steg">
-      <div class="nr">3</div>
-      <h3>Hämta programmet</h3>
-      <pre><button class="kopiera">Kopiera</button><code>git clone https://github.com/Pochtli137/infomentor-digest
-cd infomentor-digest
-npm install</code></pre>
-      <p>Sista raden tar en minut eller två. Text som rullar förbi är normalt.</p>
-    </div>
-
-    <div class="steg">
-      <div class="nr">4</div>
-      <h3>Fyll i din mejladress</h3>
-      <pre><button class="kopiera">Kopiera</button><code>cp .env.exempel .env
-open .env</code></pre>
-      <p>En textfil öppnas. Fyll i din mejladress på de tre raderna som börjar med MAIL.
-        Spara och stäng.</p>
-      <div class="tips"><b>Har du Gmail?</b> Ditt vanliga lösenord fungerar inte. Gå till
-        <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a>,
-        skapa ett app-lösenord, och klistra in det i stället. Det ser ut som fyra grupper om fyra bokstäver.</div>
-    </div>
-
-    <div class="steg">
-      <div class="nr">5</div>
-      <h3>Logga in med BankID</h3>
-      <pre><button class="kopiera">Kopiera</button><code>npm run logga-in</code></pre>
-      <p>Ett webbläsarfönster öppnas. Välj din kommun och logga in precis som vanligt.
-        När du ser InfoMentors startsida sparar programmet inloggningen och stänger fönstret.
-        <strong>Det här gör du bara en gång.</strong></p>
-      <div class="tips">Inget lösenord sparas. Det som sparas är samma sorts nyckel som
-        InfoMentors egen app använder, och den ligger bara på din dator.</div>
-    </div>
-
-    <div class="steg">
-      <div class="nr">6</div>
-      <h3>Testa</h3>
-      <pre><button class="kopiera">Kopiera</button><code>npm test</code></pre>
-      <p>Nu hämtas veckans innehåll och en fil som heter <em>forhandsvisning.html</em> skapas i mappen.
-        Öppna den för att se hur brevet ser ut. Inget mejl skickas i det här läget.</p>
-      <p>Ser det bra ut skickar du skarpt med:</p>
-      <pre><button class="kopiera">Kopiera</button><code>npm start</code></pre>
-    </div>
-
-    <div class="steg">
-      <div class="nr">7</div>
-      <h3>Låt det gå automatiskt</h3>
-      <p>På Mac: kör raden nedan, så kommer brevet varje måndag klockan nio.</p>
-      <pre><button class="kopiera">Kopiera</button><code>(crontab -l 2>/dev/null; echo "0 9 * * 1 cd $(pwd) && $(which npm) start >> skolveckan.log 2>&1") | crontab -</code></pre>
-      <p>På Windows använder du Task Scheduler och pekar den på <em>npm start</em> i mappen.</p>
-    </div>
+    <!-- Schoolity + ChatGPT -->
+    <div class="panel" id="schoolity-chatgpt" hidden>
+      <p>ChatGPT läser Schoolity i en egen webbläsare i molnet. Du loggar in där en gång med Google,
+        och datorn behöver inte vara igång när veckan sammanfattas.</p>
+      <div class="steg">
+        <div class="nr">1</div>
+        <h3>Starta en uppgift i Work</h3>
+        <p>Öppna <a href="https://chatgpt.com">chatgpt.com</a>, välj <b>Work</b> och klistra in:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Öppna schoolity.com/login/?autoinlog=true och sammanfatta vad som hänt i skolan den senaste veckan.
+Gå igenom Anslagstavlan, notiserna, Uppgifter och Frånvaro.
+Börja med sådant jag måste göra något åt, som svar, anmälningar och saker som ska med till skolan.
+Ta sedan meddelanden från skolan, läxor och prov, inställda lektioner och frånvaro, med datum.
+Skriv "inget nytt" under en rubrik hellre än att hoppa över den.
+Ta bara med sådant som står i Schoolity. Ändra ingenting och svara inte på något där.</code></pre>
+      </div>
+      <div class="steg">
+        <div class="nr">2</div>
+        <h3>Logga in när ChatGPT ber om det</h3>
+        <p>ChatGPT stannar vid Schoolitys inloggning. Ta över webbläsaren och logga in med det
+          Google-konto du använder för Schoolity. Sedan fortsätter ChatGPT själv.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">3</div>
+        <h3>Gör det till en vana</h3>
+        <p>När sammanfattningen ser bra ut skriver du:</p>
+        <pre><button class="kopiera">Kopiera</button><code>Gör det här varje måndag klockan sju.</code></pre>
+        <p>Uppgiften syns sedan under <b>Scheduled</b>.</p>
+      </div>
+      <div class="steg">
+        <div class="nr">4</div>
+        <h3>Få besked via mejl</h3>
+        <p>Gå till Inställningar och Notiser och slå på e-post för schemalagda uppgifter.
+          Då mejlar ChatGPT dig när veckans sammanfattning är klar.</p>
+      </div>
+      <p class="bor"><b>Var inloggningen sparas:</b> i ChatGPT:s webbläsare hos OpenAI, inte på din dator.
+        Den gäller tills Schoolity släpper den, och då loggar du in igen på samma sätt.</p>
     </div>
   </div>
 
   <div class="avd">
     <h2>Om något krånglar</h2>
+    <details><summary>Sammanfattningen kom inte på måndagen</summary>
+      <div class="in">Med Claude måste datorn vara vaken och Claude Desktop eller Chrome öppen när uppgiften körs.
+        Flytta tiden till när datorn brukar vara igång. Med ChatGPT: kolla under Scheduled om uppgiften
+        stannade vid inloggningen, och logga in igen.</div></details>
     <details><summary>Jag hittar inte Extensions i Claude</summary>
       <div class="in">Du behöver Claude Desktop, inte webbversionen. Hämta den på
         <a href="https://claude.ai/download">claude.ai/download</a> och leta under Inställningar.</div></details>
-    <details><summary>"command not found: git" eller "npm"</summary>
-      <div class="in">Node är inte installerat, eller så behöver du stänga och öppna Terminal igen
-        efter installationen. Prova det först.</div></details>
     <details><summary>Inloggningen fungerar inte</summary>
-      <div class="in">Varje kommun har sin egen inloggning och alla är inte testade. Fastnar det,
-        öppna ett ärende på GitHub och skriv vilken kommun det gäller.</div></details>
-    <details><summary>Mejlet kommer inte fram</summary>
-      <div class="in">Med Gmail krävs ett app-lösenord, inte ditt vanliga. Kolla också skräpposten
-        första gången.</div></details>
-    <details><summary>Jag har flera barn</summary>
-      <div class="in">InfoMentor lämnar bara ut det barn som är aktivt i portalen. Brevet talar om
-        vilket det gäller, och du byter barn inne i InfoMentor för att växla. Det går tyvärr inte
-        att komma runt utifrån.</div></details>
+      <div class="in">Varje kommun har sin egen inloggning till InfoMentor och alla är inte testade. Fastnar det,
+        öppna ett ärende på GitHub och skriv vilken kommun och vilken väg det gäller.</div></details>
+    <details><summary>Jag har flera barn i InfoMentor</summary>
+      <div class="in">InfoMentor lämnar bara ut det barn som är aktivt i portalen. Sammanfattningen gäller det
+        barnet, och du byter barn inne i InfoMentor för att växla. Det går inte att komma runt utifrån.</div></details>
     <details><summary>Det slutade fungera</summary>
-      <div class="in">InfoMentor kan ändra sin webb när som helst, och då slutar det fungera tills
-        någon lagar det. Kolla om det finns en nyare version på GitHub.</div></details>
+      <div class="in">Plattformarna kan ändra sina sidor när som helst. Med ChatGPT eller Claude i Chrome brukar det
+        räcka att justera instruktionen. Med InfoMentor-tillägget, kolla om det finns en nyare version på GitHub.</div></details>
+    <details><summary>Jag vill ha ett riktigt mejl till flera, utan AI-tjänst</summary>
+      <div class="in">För InfoMentor finns ett program du kör själv på datorn. Det mejlar från din egen adress till
+        så många du vill, varje måndag. Det kräver att du klistrar in några rader i Terminal.
+        <a href="https://github.com/Pochtli137/infomentor-digest#readme">Instruktionerna finns på GitHub</a>.</div></details>
   </div>
 
   <div class="avd">
-    <h2>Sprid koden, inte tjänsten</h2>
+    <h2>Sprid sidan, inte tjänsten</h2>
     <p>Tipsa gärna andra föräldrar. Men bygg inte om det här till en sajt där andra loggar in hos dig.
       Då tar du emot andras inloggningar till uppgifter om andras barn och blir juridiskt ansvarig för dem.</p>
     <div class="obs">Öppna Skolplattformen gjorde motsvarande för Stockholms tidigare skolplattform
       och polisanmäldes 2021 för dataintrång. Åtalet lades ner, men det tog år av utvecklarnas liv.
-      Så länge var och en kör programmet på sin egen dator med sin egen inloggning finns inte den frågan.</div>
+      Så länge var och en kopplar sin egen assistent till sitt eget konto finns inte den frågan.</div>
   </div>
 </main>
 
 <footer class="w">
   Öppen källkod under MIT-licens ·
   <a href="https://github.com/Pochtli137/infomentor-digest">koden på GitHub</a> ·
-  ingen koppling till InfoMentor
+  ingen koppling till InfoMentor, Schoolity, Anthropic eller OpenAI
 </footer>
 
 <script>
-  var flikar = document.querySelectorAll('.flikar button');
-  flikar.forEach(function (f) {
-    f.addEventListener('click', function () {
-      flikar.forEach(function (a) {
-        var vald = a === f;
-        a.setAttribute('aria-selected', vald);
-        document.getElementById(a.getAttribute('aria-controls')).hidden = !vald;
+  var val = { plattform: 'infomentor', ai: 'claude' };
+
+  function visa() {
+    document.querySelectorAll('.flikar').forEach(function (g) {
+      g.querySelectorAll('button').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.dataset.val === val[g.dataset.grupp]);
       });
+    });
+    var id = val.plattform + '-' + val.ai;
+    document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.id !== id; });
+    if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
+  }
+
+  var start = location.hash.slice(1).split('-');
+  if (['infomentor', 'schoolity'].indexOf(start[0]) > -1) val.plattform = start[0];
+  if (['claude', 'chatgpt'].indexOf(start[1]) > -1) val.ai = start[1];
+  if (location.hash) visa();
+
+  document.querySelectorAll('.flikar button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      val[b.parentElement.dataset.grupp] = b.dataset.val;
+      visa();
     });
   });
 

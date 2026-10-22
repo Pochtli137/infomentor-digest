@@ -24,7 +24,7 @@ git clone https://github.com/Pochtli137/infomentor-digest
 cd infomentor-digest
 npm install
 
-cp .env.exempel .env      # fyll i mejladress och app-lösenord
+cp .env.example .env       # fyll i mejladress och app-lösenord
 npm run logga-in          # öppnar webbläsare, du loggar in med BankID
 npm test                  # hämtar och sparar forhandsvisning.html, skickar inget
 npm start                 # skickar mejlet
