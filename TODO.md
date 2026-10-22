@@ -17,6 +17,18 @@ Kims order, före testerna.** Tre av fyra vägar ligger alltså live otestade.
   molnwebbläsare, som minns inloggningar och kan schemaläggas.
 - Claude i Chrome kan schemalägga sparade genvägar, kräver att Chrome är öppen.
 
+**Testat 2026-10-22 (Claude):**
+- InfoMentor + Claude: releasens .mcpb (v1.0.0, 3,4 MB) laddas ner, servern startar, status ok,
+  `infomentor_veckan` gav 5 457 tecken på 8 s mot Kims konto. Inte testat: installation i Claude
+  Desktop och att en schemalagd molnuppgift når tillägget när appen är öppen.
+- Schoolity + Claude i Chrome: Kims vanliga Chrome gick rakt in i /app/ via autoinlog, utan
+  Google-steg. Startsidan har ~10 000 tecken läsbar text. Menyn är på engelska för Kims konto
+  (Home, Schedule, Overview, Info, Curriculum, Absence, IUP, Our school), så instruktionens
+  svenska fliknamn fanns inte. Instruktionerna pekar nu på "varje del i menyn" i stället.
+  Inte testat: en hel sammanfattning, genvägen och schemaläggningen i sidopanelen.
+- ChatGPT-vägarna: inte testade. Kims privata ChatGPT används inte, HSNG:s konto får inte ta
+  privat material. Kräver en annan förälder med Plus.
+
 **Nästa:**
 1. Kim testar de tre otestade vägarna, två körningar med en vecka emellan (håller inloggningen?):
    Schoolity + Claude i Chrome, InfoMentor + ChatGPT Work, Schoolity + ChatGPT Work.
