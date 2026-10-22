@@ -29,6 +29,10 @@ Kims order, före testerna.** Tre av fyra vägar ligger alltså live otestade.
 - ChatGPT-vägarna: inte testade. Kims privata ChatGPT används inte, HSNG:s konto får inte ta
   privat material. Kräver en annan förälder med Plus.
 
+**Mail till leverantörerna 2026-10-22:** Kim lät skicka förslag om ett inbyggt veckomail till
+info@infomentor.se och info@schoolity.com (adresserna från deras startsidor), från Kims Gmail via
+kim-mail, med länk till skolveckan.vercel.app. Väntar svar.
+
 **Nästa:**
 1. Kim testar de tre otestade vägarna, två körningar med en vecka emellan (håller inloggningen?):
    Schoolity + Claude i Chrome, InfoMentor + ChatGPT Work, Schoolity + ChatGPT Work.
